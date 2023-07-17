@@ -1,6 +1,7 @@
 package kim.mingyu.javacommand.helper;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,10 +23,9 @@ public class CommandHelper {
         replaceMap.put("COMMAND_NAME", commandName);
         replaceMap.put("COMMAND_NAME_LOWER",commandName.toLowerCase().replace("command",""));
 
-        stubPath = getClass().getResource("/" + stubPath).getPath();
-        stubPath = stubPath.substring(1).replace("/","\\");
+        InputStream stream = getClass().getResourceAsStream("/" + stubPath);
+        ContentMaker contentMaker = new ContentMaker(stream, replaceMap);
 
-        ContentMaker contentMaker = new ContentMaker(stubPath, replaceMap);
         return contentMaker.render();
     }
 

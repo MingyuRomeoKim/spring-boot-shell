@@ -1,6 +1,7 @@
 package kim.mingyu.javacommand.helper;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,10 +26,9 @@ public class ControllerHelper {
         replaceMap.put("CONTROLLER_NAME", controllerName);
         replaceMap.put("CONTROLLER_NAME_LOWER_WITHOUT_CONTROLLER", controllerName.toLowerCase().replace("controller",""));
 
-        stubPath = getClass().getResource("/" + stubPath).getPath();
-        stubPath = stubPath.substring(1).replace("/","\\");
+        InputStream stream = getClass().getResourceAsStream("/" + stubPath);
+        ContentMaker contentMaker = new ContentMaker(stream, replaceMap);
 
-        ContentMaker contentMaker = new ContentMaker(stubPath, replaceMap);
         return contentMaker.render();
     }
 

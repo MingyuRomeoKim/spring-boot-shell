@@ -1,8 +1,13 @@
 package kim.mingyu.javacommand.helper;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ServiceHelper {
 
@@ -21,10 +26,9 @@ public class ServiceHelper {
         replaceMap.put("SERVICE_NAMESPACE", this.serviceNamespace);
         replaceMap.put("SERVICE_NAME", serviceName);
 
-        stubPath = getClass().getResource("/" + stubPath).getPath();
-        stubPath = stubPath.substring(1).replace("/","\\");
+        InputStream stream = getClass().getResourceAsStream("/" + stubPath);
+        ContentMaker contentMaker = new ContentMaker(stream, replaceMap);
 
-        ContentMaker contentMaker = new ContentMaker(stubPath, replaceMap);
         return contentMaker.render();
     }
 

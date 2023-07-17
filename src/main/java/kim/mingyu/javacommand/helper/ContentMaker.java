@@ -1,34 +1,37 @@
 package kim.mingyu.javacommand.helper;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.*;
 import java.io.IOException;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ContentMaker {
 
-    protected String path;
+    protected InputStream stream;
     protected Map<String, String> replaces;
 
-    public ContentMaker(String path, Map<String, String> replaces) {
-        this.path = path;
+    public ContentMaker(InputStream stream, Map<String, String> replaces) {
+        this.stream = stream;
         this.replaces = replaces;
     }
 
-    public String getPath() {
-        return this.path;
+    public InputStream getStream() {
+        return this.stream;
     }
 
     public String getContents() throws IOException {
-        Path filePath = Paths.get(this.path);
-        String contents = new String(Files.readAllBytes(filePath));
 
-        for (Map.Entry<String, String> entry : this.replaces.entrySet()) {
-            String search = "$$" + entry.getKey().toUpperCase() + "$$";
-            String replace = entry.getValue();
-            contents = contents.replace(search, replace);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(this.stream));
+        String content = reader.lines().collect(Collectors.joining("\n"));
+
+        for (Map.Entry<String, String> replace : this.replaces.entrySet()) {
+            content = content.replace("$$" + replace.getKey().toUpperCase() + "$$", replace.getValue());
         }
 
-        return contents;
+        return content;
     }
 
     public String render() throws IOException {
