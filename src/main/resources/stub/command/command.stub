@@ -1,0 +1,26 @@
+package $$COMMAND_NAMESPACE$$;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellOption;
+
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@ShellComponent
+public class $$COMMAND_NAME$$ {
+
+    @Value("${project.$$COMMAND_NAME_LOWER$$.package}")
+    private String $$COMMAND_NAME_LOWER$$Package;
+
+    @Value("${project.$$COMMAND_NAME_LOWER$$.package.path}")
+    private String $$COMMAND_NAME_LOWER$$PackagePath;
+
+    @ShellMethod(key = "make:$$COMMAND_NAME_LOWER$$", value="$$COMMAND_NAME_LOWER$$ creation command")
+    public boolean make$$COMMAND_NAME_LOWER$$(@ShellOption(help = "Name for the command", defaultValue = "") String $$COMMAND_NAME_LOWER$$Name) {
+        return true;
+    }
+}

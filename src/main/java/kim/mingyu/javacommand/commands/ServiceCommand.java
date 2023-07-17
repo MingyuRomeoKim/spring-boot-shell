@@ -1,4 +1,4 @@
-package kim.mingyu.javacommand.command;
+package kim.mingyu.javacommand.commands;
 
 import kim.mingyu.javacommand.helper.FileMaker;
 import kim.mingyu.javacommand.helper.ServiceHelper;
@@ -21,7 +21,7 @@ public class ServiceCommand {
     @Value("${project.service.package.path}")
     private String servicePackagePath;
 
-    @ShellMethod(key = "make:service", value="Service creation command")
+    @ShellMethod(key = "make:service", value="make:service {serviceName} 을 입력하면 serviceName에 해당하는 이름의 Service Class를 만든다.")
     public boolean makeService(@ShellOption(help = "Name for the service", defaultValue = "") String serviceName) {
 
         if (serviceName.trim().length() < 1) {

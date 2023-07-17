@@ -2,5 +2,7 @@ package $$SERVICE_NAMESPACE$$;
 
 public class $$SERVICE_NAME$$
 {
-
+    public $$SERVICE_NAME$$() {
+        // 생성자
+    }
 }
