@@ -20,7 +20,7 @@ public class $$COMMAND_NAME$$ {
     private String $$COMMAND_NAME_LOWER$$PackagePath;
 
     @ShellMethod(key = "make:$$COMMAND_NAME_LOWER$$", value="$$COMMAND_NAME_LOWER$$ creation command")
-    public boolean make$$COMMAND_NAME_LOWER$$(@ShellOption(help = "Name for the command", defaultValue = "") String $$COMMAND_NAME_LOWER$$Name) {
+    public boolean make$$COMMAND_NAME$$(@ShellOption(help = "Name for the command", defaultValue = "") String $$COMMAND_NAME_LOWER$$Name) {
         return true;
     }
 }

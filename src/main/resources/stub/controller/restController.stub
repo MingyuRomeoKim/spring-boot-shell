@@ -1,0 +1,55 @@
+package $$CONTROLLER_NAMESPACE$$;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/$$CONTROLLER_NAME_LOWER_WITHOUT_CONTROLLER$$")
+public class $$CONTROLLER_NAME$$
+{
+
+    private final ExampleRepository repository;
+
+    public $$CONTROLLER_NAME$$(ExampleRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping
+    public List<Example> all() {
+        return repository.findAll();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Example new(@RequestBody Example newExample) {
+        return repository.save(newExample);
+    }
+
+    @GetMapping("/{id}")
+    public Example one(@PathVariable Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ExampleNotFoundException(id));
+    }
+
+    @PutMapping("/{id}")
+    public Example replaceExample(@RequestBody Example newExample, @PathVariable Long id) {
+        return repository.findById(id)
+                .map(example -> {
+                    example.setName(newExample.getName());
+                    example.setPrice(newExample.getPrice());
+                    return repository.save(example);
+                })
+                .orElseGet(() -> {
+                    newExample.setId(id);
+                    return repository.save(newExample);
+                });
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteExample(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
+
+}
