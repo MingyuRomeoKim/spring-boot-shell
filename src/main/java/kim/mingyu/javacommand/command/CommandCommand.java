@@ -1,4 +1,4 @@
-package kim.mingyu.javacommand.commands;
+package kim.mingyu.javacommand.command;
 
 import kim.mingyu.javacommand.helper.CommandHelper;
 import kim.mingyu.javacommand.helper.FileMaker;
@@ -14,6 +14,9 @@ import java.util.List;
 
 @ShellComponent
 public class CommandCommand {
+
+    @Value("${project.root.path}")
+    private String projectRootPath;
 
     @Value("${project.command.package}")
     private String commandPackage;
@@ -40,7 +43,7 @@ public class CommandCommand {
 
             CommandHelper commandHelper = new CommandHelper(this.commandPackage, this.commandPackagePath);
             String commandFileContent = commandHelper.getCommandTemplateContents(commandName);
-            String commandRealPath = Paths.get(System.getProperty("user.dir"), this.commandPackagePath, commandName + ".java").toString();
+            String commandRealPath = Paths.get(this.projectRootPath, this.commandPackagePath, commandName + ".java").toString();
 
             FileMaker fileMaker = new FileMaker(commandRealPath,commandFileContent);
             fileMaker.generate();

@@ -13,6 +13,9 @@ import java.util.List;
 @ShellComponent
 public class $$COMMAND_NAME$$ {
 
+    @Value("${project.root.path}")
+    private String projectRootPath;
+
     @Value("${project.$$COMMAND_NAME_LOWER$$.package}")
     private String $$COMMAND_NAME_LOWER$$Package;
 

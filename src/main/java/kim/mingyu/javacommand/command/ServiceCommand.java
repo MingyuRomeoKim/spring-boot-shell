@@ -1,4 +1,4 @@
-package kim.mingyu.javacommand.commands;
+package kim.mingyu.javacommand.command;
 
 import kim.mingyu.javacommand.helper.FileMaker;
 import kim.mingyu.javacommand.helper.ServiceHelper;
@@ -14,6 +14,9 @@ import java.util.List;
 
 @ShellComponent
 public class ServiceCommand {
+
+    @Value("${project.root.path}")
+    private String projectRootPath;
 
     @Value("${project.service.package}")
     private String servicePackage;
@@ -40,7 +43,7 @@ public class ServiceCommand {
 
             ServiceHelper serviceHelper = new ServiceHelper(this.servicePackage, this.servicePackagePath);
             String serviceFileContent = serviceHelper.getServiceTemplateContents(serviceName);
-            String serviceRealPath = Paths.get(System.getProperty("user.dir"), this.servicePackagePath, serviceName + ".java").toString();
+            String serviceRealPath = Paths.get(this.projectRootPath, this.servicePackagePath, serviceName + ".java").toString();
 
             FileMaker fileMaker = new FileMaker(serviceRealPath,serviceFileContent);
             fileMaker.generate();

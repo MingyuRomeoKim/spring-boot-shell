@@ -1,8 +1,7 @@
-package kim.mingyu.javacommand.commands;
+package kim.mingyu.javacommand.command;
 
 import kim.mingyu.javacommand.helper.ControllerHelper;
 import kim.mingyu.javacommand.helper.FileMaker;
-import kim.mingyu.javacommand.helper.ServiceHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -15,6 +14,9 @@ import java.util.List;
 
 @ShellComponent
 public class ControllerCommand {
+
+    @Value("${project.root.path}")
+    private String projectRootPath;
 
     @Value("${project.controller.package}")
     private String controllerPackage;
@@ -41,7 +43,7 @@ public class ControllerCommand {
 
             ControllerHelper controllerHelper = new ControllerHelper(this.controllerPackage, this.controllerPackagePath, controllerType);
             String controllerFileContent = controllerHelper.getControllerTemplateContents(controllerName);
-            String controllerRealPath = Paths.get(System.getProperty("user.dir"), this.controllerPackagePath, controllerName + ".java").toString();
+            String controllerRealPath = Paths.get(this.projectRootPath, this.controllerPackagePath, controllerName + ".java").toString();
 
             FileMaker fileMaker = new FileMaker(controllerRealPath, controllerFileContent);
             fileMaker.generate();
