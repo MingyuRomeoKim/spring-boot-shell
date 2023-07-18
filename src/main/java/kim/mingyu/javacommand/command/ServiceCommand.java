@@ -41,7 +41,7 @@ public class ServiceCommand {
                 this.servicePackagePath += "/" + String.join("/", dumpArray);
             }
 
-            ServiceHelper serviceHelper = new ServiceHelper(this.servicePackage, this.servicePackagePath);
+            ServiceHelper serviceHelper = new ServiceHelper(this.servicePackage);
             String serviceFileContent = serviceHelper.getServiceTemplateContents(serviceName);
             String serviceRealPath = Paths.get(this.projectRootPath, this.servicePackagePath, serviceName + ".java").toString();
 

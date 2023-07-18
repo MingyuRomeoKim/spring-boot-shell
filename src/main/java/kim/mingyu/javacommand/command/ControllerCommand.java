@@ -41,7 +41,7 @@ public class ControllerCommand {
                 this.controllerPackagePath += "/" + String.join("/", dumpArray);
             }
 
-            ControllerHelper controllerHelper = new ControllerHelper(this.controllerPackage, this.controllerPackagePath, controllerType);
+            ControllerHelper controllerHelper = new ControllerHelper(this.controllerPackage, controllerType);
             String controllerFileContent = controllerHelper.getControllerTemplateContents(controllerName);
             String controllerRealPath = Paths.get(this.projectRootPath, this.controllerPackagePath, controllerName + ".java").toString();
 
@@ -53,7 +53,7 @@ public class ControllerCommand {
             return false;
         }
 
-        System.out.println("Controller creation successful!! Service Name :: " + controllerName);
+        System.out.println("Controller creation successful!! Controller Name :: " + controllerName);
         return true;
     }
 }

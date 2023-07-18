@@ -8,11 +8,9 @@ import java.util.Map;
 public class CommandHelper {
 
     protected String commandNamespace;
-    protected String print;
 
-    public CommandHelper(String commandNamespace, String print) {
+    public CommandHelper(String commandNamespace) {
         this.commandNamespace = commandNamespace;
-        this.print = print;
     }
 
     public String getCommandTemplateContents(String commandName) throws IOException {

@@ -41,7 +41,7 @@ public class CommandCommand {
                 this.commandPackagePath += "/" + String.join("/", dumpArray);
             }
 
-            CommandHelper commandHelper = new CommandHelper(this.commandPackage, this.commandPackagePath);
+            CommandHelper commandHelper = new CommandHelper(this.commandPackage);
             String commandFileContent = commandHelper.getCommandTemplateContents(commandName);
             String commandRealPath = Paths.get(this.projectRootPath, this.commandPackagePath, commandName + ".java").toString();
 

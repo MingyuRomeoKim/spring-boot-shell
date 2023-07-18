@@ -8,14 +8,12 @@ import java.util.Map;
 public class ControllerHelper {
 
     protected String controllerNamespace;
-    protected String print;
 
     protected String controllerType;
 
-    public ControllerHelper(String controllerNamespace, String print, String controllerType) {
+    public ControllerHelper(String controllerNamespace, String controllerType) {
         this.controllerNamespace = controllerNamespace;
         this.controllerType = controllerType;
-        this.print = print;
     }
 
     public String getControllerTemplateContents(String controllerName) throws IOException {

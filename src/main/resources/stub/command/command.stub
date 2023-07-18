@@ -24,6 +24,12 @@ public class $$COMMAND_NAME$$ {
 
     @ShellMethod(key = "make:$$COMMAND_NAME_LOWER$$", value="$$COMMAND_NAME_LOWER$$ creation command")
     public boolean make$$COMMAND_NAME$$(@ShellOption(help = "Name for the command", defaultValue = "") String $$COMMAND_NAME_LOWER$$Name) {
+
+        if ($$COMMAND_NAME_LOWER$$Name.trim().length() < 1) {
+            System.out.println("You must have $$COMMAND_NAME_LOWER$$Name option");
+            return false;
+        }
+
         return true;
     }
 }

@@ -12,11 +12,9 @@ import java.util.stream.Collectors;
 public class ServiceHelper {
 
     protected String serviceNamespace;
-    protected String print;
 
-    public ServiceHelper(String serviceNamespace, String print) {
+    public ServiceHelper(String serviceNamespace) {
         this.serviceNamespace = serviceNamespace;
-        this.print = print;
     }
 
     public String getServiceTemplateContents(String serviceName) throws IOException {
